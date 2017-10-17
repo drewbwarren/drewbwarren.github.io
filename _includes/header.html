@@ -44,9 +44,15 @@
 						<hr class="intro-divider">
 						<ul class="list-inline intro-social-buttons">
 							{% for social in site.social %}
-							<li>
-								<a href="{{ social.url }}" class="btn btn-default btn-lg"><i class="fa fa-{{ social.title }} fa-fw"></i> <span class="network-name">{{ social.title }}</span></a>
-							</li>
+								{% if social.title == 'file' %}
+								<li>
+									<a href="{{ social.url }}" class="btn btn-default btn-lg"><i class="fa fa-file fa-fw"></i> <span class="network-name">Resume</span></a>
+								</li>
+								{% else %}
+								<li>
+									<a href="{{ social.url }}" class="btn btn-default btn-lg"><i class="fa fa-{{ social.title }} fa-fw"></i> <span class="network-name">{{ social.title }}</span></a>
+								</li>
+								{% endif %}
 							{% endfor %}
 						</ul>
 					</div>
