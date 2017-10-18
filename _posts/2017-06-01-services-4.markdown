@@ -2,7 +2,7 @@
 layout: default
 title: University Rover Competion 
 date: June 1, 2014
-category: Services
+category: projects
 img: rover_and_arm.jpg
 description: | 
 ---

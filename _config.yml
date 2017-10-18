@@ -10,6 +10,7 @@ description: > # "Write an awesome description for your new site here.
     This is a project portfolio site for Drew Warren. It was created using Jekyll based on the Landing Page template. Projects are included from Drew's time as an undergraduate student at Brigham Young Universtiy and a master's student at Northwestern University.
 copyright: 'Copyright &copy; 2017 Drew Warren. All Rights Reserved.'
 credits: 'Credits: Landing Page is a free to use, open source Bootstrap theme created by <a href="http://startbootstrap.com/">Start Bootstrap</a>.'
+baseurl: /drewbwarren.github.io
 
 # ----------------------- #
 #    Jekyll & Plugins     #
