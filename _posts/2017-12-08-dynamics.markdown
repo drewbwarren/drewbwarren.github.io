@@ -1,0 +1,9 @@
+---
+layout: project
+title: Baxter Butler
+date: December 8, 2017
+category: projects
+img: baxter_butler.png
+description: This project combined all the principles that I gained from a class all about ROS, the Robot Operating System. I worked together on a team with four other students to program a Baxter robot to locate a cup on a table, grasp the cup, locate the right hand of a person in view of a depth sensing camera, and the bring the cup to the person's hand without tipping it over.
+---
+some content

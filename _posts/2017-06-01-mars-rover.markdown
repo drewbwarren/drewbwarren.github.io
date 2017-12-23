@@ -9,5 +9,4 @@ description: For my senior capstone project at Brigham Young University I was a 
 
 Here is all that content stuff.
 
-<img src="{{ page.img }}"/>
 

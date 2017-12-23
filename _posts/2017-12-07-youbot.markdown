@@ -1,0 +1,8 @@
+---
+layout: project
+title: Mobile Robotic Arm Controller
+date: December 7, 2017
+category: projects
+img: youbot.png
+description: As a project for a robotic manipulation course, I developed a controller for the Kuka Youbot. From a desired trajectory for the end effector, I calculated the joint angles and base states that will place the end effector in that trajectory. To correct an initial error from the trajectory and to continue through the path, I used a combined feedforward and PI controller.
+---
