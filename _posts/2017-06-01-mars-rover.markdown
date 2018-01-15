@@ -23,21 +23,13 @@ Mostly I worked on the robot arm on the rover with two other students. Two of th
 
 In redesigning the arm, my subteam and I had to decide which features to keep, which ones to change, and which ones to throw out. We did our own analysis of the arm geometry, looking at link lengths and the orientation of each joint, to obtain a good reachable workspace from the arm. We kept the same configuration of joints but modified the link lengths to give the arm more space to work in.
 
-arm analysis picture
-
 The best part of the old arm was the end effector or gripper. We kept the original gripper, but we changed the way it attached to the motors that move it. The wrist had been actuated by one Dynamixel motor to tilt the gripper up and down and another Dynamixel to spin it. We used a bevel gear between these two motors and the gripper so that the two of them worked together to lift and twist the wrist. This increased the maximum load the wrist could lift without any significant cost.
 
-gripper picture?
-
 In an effort to reduce weight, we redesigned the two main links of the arm to be carbon fiber pipes. We moved away from a design with gearbox-motor modules to using linear actuators for the joints that would do the heavy lifting. In our analysis we saw that two of the joints would provide most of the force when lifting objects, so for those two joints we chose linear actuators to move the joints. The linear actuators provided more than enough force to lift the maximum load and their weight was less than the weight of a motor that could provide the necessary torque.
-
-arm picture
 
 I worked in large part with the electrical subteam to integrate control of the arm motors into the complete system. We used motor drivers built by Pololu to control each joint. The main microcontroller was a PSoC 5 from Cypress Semiconductor. All commands for each motor came from the onboard computer, and Nvidia Jetson TX1, to the PSoC through a serial connection. The PSoC then sent appropriate serial commands to the Pololu motor drivers to actuate the joint motors. The PSoC was also responsible for sending the correct PWM signals to the drive wheel motor controllers to actuate the wheels.
 
 Our original goal in designing the arm was to have a 6 joint arm that incorporated inverse kinematics so that the user could input a Cartesian point and the arm would move each joint the right way to put the gripper at that point. Due to time constraints we ended up with a 5 joint arm that was controlled by moving each joint individually. Controlling a robot arm joint-by-joint like this is difficult, but the time we had left was better spent practicing with the arm as it was than trying to implement inverse kinematics. Having a good understanding of the capabilities and limitations of the arm was essential for a good performance at the competition. The video featured here shows the rover working through the Equipment Servicing Task where we were asked to perform several manipulation actions that a real rover would be required to do. I was operating the arm and my teammate was driving the rover and the only vision we had was what we could see from the cameras we had on the rover.
-
-video, maybe also the video from the trailer
 
 [mars]:http://www.marssociety.org/
 [urc]:http://urc.marssociety.org/home
