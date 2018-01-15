@@ -11,6 +11,11 @@ layout: main
     background: url({{ site.baseurl }}/img/projects/{{ page.img }}) no-repeat center center;
     background-size: cover;
 }
+
+iframe {
+    padding-top: 20px;
+}
+
 </style>
 
 <div class="project-header">
@@ -28,6 +33,16 @@ layout: main
 	<div class="contact-content">
         <div class="container">
             <div class="row">
+            
+                <div class="col-md-10 col-md-offset-1">
+                    <h3>Summary</h3>
+                    {{ page.description }}
+                </div>
+
+                <div style="text-align: center;">
+                    <iframe width="560" height="315" src="{{ page.video }}" frameborder="0" allow-"autoplay: encrypted-media" allowfullscreen></iframe>
+                </div>
+                
                 <div class="col-md-10 col-md-offset-1">
 
 		            {{ content }}

@@ -5,9 +5,10 @@ date: December 7, 2017
 category: projects
 img: youbot.png
 description: As a project for a robotic manipulation course, I developed a controller for the Kuka Youbot. From a desired trajectory for the end effector, I calculated the joint angles and base states that will place the end effector in that trajectory. To correct an initial error from the trajectory and to continue through the path, I used a combined feedforward and PI controller.
+video: "https://www.youtube.com/embed/UDVB9yLg-7c?rel=0&amp;showinfo=0"
 ---
 
-### Summary
+### Background
 
 During my first quarter at Northwestern University I participated in a course on robotic manipulation taught by [Dr. Kevin Lynch][lynch]. As a project for the course I developed a controller for the Kuka Youbot. From a desired trajectory for the end effector, I calculated the joint angles and base states that will place the end effector in that trajectory. To correct an initial error from the trajectory and to continue through the path, I used a combined feedforward and PI controller.
 
