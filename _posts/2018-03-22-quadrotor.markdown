@@ -1,7 +1,7 @@
 ---
 layout: project
 title: Autonomous Quadrotor from Scratch
-date: March 22, 2018
+date: March 24, 2018
 category: projects
 img: quadrotor.JPG
 description: The controls for this quadrotor were developed from scratch. There are controllers attached to the roll, pitch, and yaw of the quadrotor as well as for its position in the room. An onboard IMU was used for the orientation control and an HTC Vive Lighthouse was used for sensing position relative to the inertial frame.
