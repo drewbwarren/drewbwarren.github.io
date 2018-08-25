@@ -1,6 +1,6 @@
 ---
 layout: project
-title: Balancing Platform Robot
+title: Autonomous Quadrotor from Scratch
 date: March 24, 2018
 category: projects
 img: quadrotor.JPG
