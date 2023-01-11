@@ -4,3 +4,26 @@ _site
 *.mp4
 *.swp
 
+/_site/
+.jekyll-metadata
+
+.idea/
+
+*.swp
+
+*.gem
+*.roc
+.bundle
+.config
+coverage
+InstalledFiles
+lib/bundler/man
+pkg
+rdoc
+spec/reports
+test/tmp
+test/version_tmp
+tmp
+vendor
+Gemfile.lock
+node_modules

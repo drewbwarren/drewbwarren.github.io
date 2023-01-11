@@ -1,33 +1,77 @@
-# ----------------------- #
-#      Main Configs       #
-# ----------------------- #
-
-url: http://drewbwarren.github.io
-title: Drew Warren
-email: drewbwarren@gmail.com
-author: Drew Warren
-description: > # "Write an awesome description for your new site here. 
-    This is a project portfolio site for Drew Warren. It was created using Jekyll based on the Landing Page template. Projects are included from Drew's time as an undergraduate student at Brigham Young Universtiy and a master's student at Northwestern University.
-copyright: 'Copyright &copy; 2017 Drew Warren. All Rights Reserved.'
-credits: 'Credits: Landing Page is a free to use, open source Bootstrap theme created by <a href="http://startbootstrap.com/">Start Bootstrap</a>.'
-baseurl: /drewbwarren.github.io
-
-# ----------------------- #
-#    Jekyll & Plugins     #
-# ----------------------- #
-
-# Build settings
+# Jekyll configuration
+#markdown: redcarpet
+#highlighter: pygments
 markdown: kramdown
-permalink: pretty
+highlighter: rouge
+paginate: 5
+language: 'en-us'
 
-# ----------------------- #
-#   3rd Party Settings    #
-# ----------------------- #
+# Website info
+name: 'Drew Warren - Portfolio'
+description: >
+    This is a project portfolio site for Drew Warren. Projects are included from Drew's time as an undergraduate student at Brigham Young University and a master's student at Northwestern University.
+short_url: 'drewbwarren.github.io'
+# baseurl: /drewbwarren.github.io
+google_analytics: UA-69281367-1
+disqus: username
+# edit baseurl to simply '/' if using as your personal page (instead of a project page)
+# baseurl: '/drewbwarren.github.io'
+baseurl: '/'
 
+# Permalinks
+permalink: /:title
+# permalink: /author/:username
+# permalink: /tag/:tag
+
+# gems and other configs
+plugins: [jekyll-paginate]
+
+# Additional settings available on the front-matter
+# Site logo in the index.html (as in demo.ghost.io)
+# Author's page cover in _layouts/author.html
+# The same for page.html and tag.html layouts
+# Post's page cover as a per-post basis _posts/...
+# Disqus comments as a per-post basis
+# ...
+
+
+# Settings for builing master branch with travis-ci
+# with jekyll-travis
+
+# Settings for deploy rake task
+# Username and repo of Github repo, e.g.
+# https://github.com/USERNAME/REPO.git
+# username defaults to ENV['GIT_NAME'] used by Travis
+# repo defaults to USERNAME.github.io
+# Branch defaults to "source" for USERNAME.github.io
+# or "master" otherwise
+safe: false
+lsi: false
+username: jekyllt
+repo: jasper
+branch: master
+relative_source: ../jasper/
+destination: ../jasper-pages/
+production_url:  https://jekyllt.github.io/jasper/
+source_url:  https://github.com/jekyllt/jasper/
+
+exclude:
+  - README.md
+  - Rakefile
+  - Gemfile
+  - Gemfile.lock
+  - changelog.md
+  - "*.Rmd"
+  - vendor
+  - .travis.yml
+  - node_modules
+  - .git
+
+# 3rd Party Settings
 social:
-  - title: file
+    title: file
     url: downloads/2017-10-17-Drew_Warren_Resume.pdf
-  - title: github
+    title: github
     url: https://github.com/drewbwarren
-  - title: linkedin
+    title: linkedin
     url: https://www.linkedin.com/in/andrew-warren-90808ab0/
