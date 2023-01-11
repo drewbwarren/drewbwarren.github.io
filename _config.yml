@@ -4,17 +4,19 @@
 markdown: kramdown
 highlighter: rouge
 paginate: 5
-language: 'en-uk'
+language: 'en-us'
 
 # Website info
-name: 'Finding The Way Home'
-description: "A beautiful narrative written with the world's most elegant publishing platform. The story begins here."
-
-short_url: 'jekyllt.github.io/jasper/'
+name: 'Drew Warren - Portfolio'
+description: >
+    This is a project portfolio site for Drew Warren. Projects are included from Drew's time as an undergraduate student at Brigham Young University and a master's student at Northwestern University.
+short_url: 'drewbwarren.github.io'
+# baseurl: /drewbwarren.github.io
 google_analytics: UA-69281367-1
 disqus: username
 # edit baseurl to simply '/' if using as your personal page (instead of a project page)
-baseurl: /jasper/
+# baseurl: '/drewbwarren.github.io'
+baseurl: '/'
 
 # Permalinks
 permalink: /:title
@@ -64,3 +66,12 @@ exclude:
   - .travis.yml
   - node_modules
   - .git
+
+# 3rd Party Settings
+social:
+    title: file
+    url: downloads/2017-10-17-Drew_Warren_Resume.pdf
+    title: github
+    url: https://github.com/drewbwarren
+    title: linkedin
+    url: https://www.linkedin.com/in/andrew-warren-90808ab0/

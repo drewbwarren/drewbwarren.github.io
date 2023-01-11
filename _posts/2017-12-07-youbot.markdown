@@ -1,0 +1,27 @@
+---
+layout: project
+title: Mobile Robot Arm Controller
+date: December 7, 2017
+category: projects
+img: youbot.png
+description: As a project for a robotic manipulation course, I developed a controller for the Kuka Youbot. From a desired trajectory for the end effector, I calculated the joint angles and base states that will place the end effector in that trajectory. To correct an initial error from the trajectory and to continue through the path, I used a combined feedforward and PI controller.
+video: "https://www.youtube.com/embed/UDVB9yLg-7c?rel=0&amp;showinfo=0"
+---
+
+### Background
+
+This project was the final for a course on robotic manipulation taught by [Dr. Kevin Lynch][lynch]. I implemented the controller all in Python with the help of the [*Modern Robotics*][lib] library provided by Dr. Lynch's textbook. To visualize the movement of the Youbot, I used the [V-REP][vrep] simulator.
+
+#### Kinematics
+
+The desired trajectory is given as a position and an orientation that change over time. Time scaling is used to maximize the velocity of the trajectory without straining the motors of the robot too much as it accelerates and decelerates at the start and end of the path. At each point along that path, my controller solves for both the joint angles of the 5 joint robot arm and the wheel rotations of the base that will place the end effector at that desired point.  
+
+#### Controller
+
+I developed a control system to correct the error of the end effector as it moves through the trajectory. The initial position of the arm and base are set such that the robot begins with some error, and the controller quickly brings the end effector in to the correct position. For the controller I built a combined feedforward and PI controller. The feedforward portion comes from the kinematic solution for the joints moving forward directly as if the robot started at an initial position on the path. The PI controller measures the error between current position and desired position and applies gains to reduce the error quickly in a way similar to a second order system. This behavior can be seen in the overshoot and oscillation in the plots of the error.
+
+
+[lynch]:http://www.mccormick.northwestern.edu/research-faculty/directory/profiles/lynch-kevin.html
+[vrep]:http://www.coppeliarobotics.com/
+[lib]:https://github.com/NxRLab/ModernRobotics
+

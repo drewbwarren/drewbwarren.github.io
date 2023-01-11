@@ -1,20 +1,19 @@
-# OS X
-.DS_Store
+_site
 
-# Jekyll build
-/_site/
-.jekyll-metadata
-#Gemfile.lock
-
-# webstorm
-.idea/
-
-# others
+*.MOV
+*.mp4
 *.swp
 
-# site build
+/_site/
+.jekyll-metadata
+
+.idea/
+
+*.swp
+
 *.gem
 *.rbc
+
 .bundle
 .config
 coverage
