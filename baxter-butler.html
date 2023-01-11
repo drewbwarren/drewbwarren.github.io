@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+	    <link rel="canonical" href="//baxter-butler" />
+    <meta name="referrer" content="origin" />
+    <link rel="next" href="/page2/" />
+
+    <meta property="og:site_name" content="Drew Warren - Portfolio" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Baxter Butler" />
+    <meta property="og:description" content="This project combined all the principles that I learned from a course all about ROS, the Robot Operating System. I worked on a team with four other students to program a Baxter robot to locate a cup on a table, grasp the cup, locate the right hand of a person in view of a depth sensing camera, and then bring the cup to the person's hand without tipping it over." />
+    <meta property="og:url" content="//baxter-butler" />
+    <meta property="og:image" content="/assets/images/cover1.jpg" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Baxter Butler" />
+    <meta name="twitter:description" content="This project combined all the principles that I learned from a course all about ROS, the Robot Operating System. I worked on a team with four other students to program a Baxter robot to locate a cup on a table, grasp the cup, locate the right hand of a person in view of a depth sensing camera, and then bring the cup to the person's hand without tipping it over." />
+    <meta name="twitter:url" content="//baxter-butler" />
+    <meta name="twitter:image:src" content="/assets/images/cover1.jpg" />
+
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Website",
+    "publisher": "Drew Warren - Portfolio",
+    "name": "Baxter Butler",
+    "url": "//baxter-butler",
+    "image": "/assets/images/cover1.jpg",
+    "description": "This project combined all the principles that I learned from a course all about ROS, the Robot Operating System. I worked on a team with four other students to program a Baxter robot to locate a cup on a table, grasp the cup, locate the right hand of a person in view of a depth sensing camera, and then bring the cup to the person's hand without tipping it over."
+}
+    </script>
+
+    <meta name="generator" content="Jekyll 3.0.0" />
+    <link rel="alternate" type="application/rss+xml" title="Drew Warren - Portfolio" href="/feed.xml" />
+
+
+	<body>
+	
+
+		<!-- Navigation -->
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand page-scroll" href="//#home"></a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="page-scroll" href="//#projects">Projects</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="//#about">About</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="//#contact">Contact</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+
+
+		<style>
+.project-header {
+    padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
+    padding-bottom: 50px;
+    text-align: center;
+    color: #f8f8f8;
+    background: url(/img/projects/baxter_butler.png) no-repeat center center;
+    background-size: cover;
+}
+
+.project {
+    font-size: 18px;
+}
+
+h3 {
+    font-size: 28px;
+}
+
+h4 {
+    font-size: 24px;
+}
+
+iframe {
+    padding-top: 20px;
+}
+
+</style>
+
+<div class="project-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="intro-message">
+                    <h1>Baxter Butler</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="project">
+	<div class="contact-content">
+        <div class="container">
+            <div class="row">
+            
+                <div class="col-md-10 col-md-offset-1">
+                    <h3>Summary</h3>
+                    This project combined all the principles that I learned from a course all about ROS, the Robot Operating System. I worked on a team with four other students to program a Baxter robot to locate a cup on a table, grasp the cup, locate the right hand of a person in view of a depth sensing camera, and then bring the cup to the person's hand without tipping it over.
+                </div>
+
+                <div style="text-align: center;">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/RMCaAgLhMFE?rel=0&amp;showinfo=0" frameborder="0" allow-"autoplay: encrypted-media" allowfullscreen></iframe>
+                </div>
+                
+                <div class="col-md-10 col-md-offset-1">
+
+		            <h3 id="tasks">Tasks</h3>
+
+<h4 id="locate-the-cup">Locate the Cup</h4>
+
+<p>The first main task of the project was to find the cup and then grab it. Baxter starts with the arm in a position such that the end effector is horizontal and faces the table so that the hand camera can see the top of the table. All of that is done in a ROS node called <code class="language-plaintext highlighter-rouge">scan</code>. At the same time the <code class="language-plaintext highlighter-rouge">track_cup</code> node performs some computer vision filtering to locate the center of a red cup. Once the center of the cup is centered in the middle of the camera’s view, the <code class="language-plaintext highlighter-rouge">move_to_cup</code> node is started, which executes a motion from the arm’s current position to move directly to a grasping position.</p>
+
+<h4 id="skeleton-tracker">Skeleton Tracker</h4>
+
+<p>At this point, the Asus Xtion camera (a simplified version of the Xbox Kinect) is used to locate the position of a person’s right hand. This is done using the <code class="language-plaintext highlighter-rouge">skeletontracker_nu</code> package developed by Northwestern’s NxR lab. This package filters the camera’s data to identify separate people in its view and returns a basic skeleton of each person. The skeleton is just the set of 3D points that correspond to several basic joints, such as neck, shoulder, elbow, wrist, etc. Our <code class="language-plaintext highlighter-rouge">filter_V2</code> node filters through the set of skeletons to select only the person that is closest to Baxter and most directly in front of him. In the end, this node returns the 3D point corresponding to that person’s right hand.</p>
+
+<h4 id="constrained-motion">Constrained Motion</h4>
+
+<p>The final task is to plan a path from the arm’s position where it grabbed the cup to the position of the person’s hand with an orientation constraint such that the cup does not tip over. We used The MoveIt! package from ROS to do this path planning. At first we took the approach of giving MoveIt! the goal pose (the position of the person’s hand) and planning the path in Cartesian space with an orientation constraint included. While this did work, the calculations took a long time. The final approach was to find a joint space solution for the goal pose and then feed those joint positions into MoveIt! to plan a path in joint space. For this approach we actually removed the orientation constraint. Since the start pose and end pose have the same orientation, MoveIt! almost never created paths that change the orientation. While this is not the most robust solution, it did cut down the computation time greatly so that the overall performance was more refined.</p>
+
+
+
+                </div>
+            </div>
+	    </div>
+    </div>
+</div>
+
+
+		<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <ul class="list-inline">
+                    <li>
+                        <a href="//#home">Home</a>
+                    </li>
+                    <li class="footer-menu-divider">&sdot;</li>
+                    <li>
+                        <a href="//#projects">Projects</a>
+                    </li>
+                    <li class="footer-menu-divider">&sdot;</li>
+                    <li>
+                        <a href="//#about">About</a>
+                    </li>
+                    <li class="footer-menu-divider">&sdot;</li>
+                    <li>
+                        <a href="//#contact">Contact</a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted small"></p>
+            </div>
+            <div class="col-md-4">
+                
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+	</body>
+</html>

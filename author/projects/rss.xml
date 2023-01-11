@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+   
+      <title>drewbwarren.github.io</title>
+   
+   <link></link>
+   <description>This is a project portfolio site for Drew Warren. Projects are included from Drew's time as an undergraduate student at Brigham Young University and a master's student at Northwestern University.
+</description>
+   <language>en-us</language>
+   <managingEditor> </managingEditor>
+   <atom:link href="rss" rel="self" type="application/rss+xml" />
+   
+	<item>
+	  <title>Ankle Rotator Design</title>
+	  <link>//ankle-rotator</link>
+	  <author></author>
+	  <pubDate>2018-08-24T00:00:00+00:00</pubDate>
+	  <guid>//ankle-rotator</guid>
+	  <description><![CDATA[
+	     <h3 id="proposal">Proposal</h3>
+<p>All the work here was done to contribute to the research of Dr. Daniel Ludvig of the Shirley Ryan Abilitylab. His research is focused on investigating neuromuscular motor control of the limbs. The long term goal is to develop individualized treatment plans that will eliminate chronic ankle instability. As a first step the central hypothesis is that the main factor for ankle stability is the mechanical stiffness of the joint.</p>
+
+<p>My specific contribution to his research is a design for a prototype clinical device that will actuate a patients ankle in two/three degrees of freedom. The device should actuate oscillations on the ankle in the frontal plane and in the sagittal plane. A stretch goal is for the device to be compliant to patient actuation in the vertical direction to act as a simulated stepping motion. The point of rotation on the device should be at the patient’s ankle. Force and torque measurements will be gathered through a 6 degree of freedom load cell on the device in order to characterize ankle stiffness and stability.</p>
+
+<p>The proposed specifications for the device are shown in the table below.
+!!!!
+SPECS TABLE HERE
+!!!!</p>
+
+
+	  ]]></description>
+	</item>
+
+	<item>
+	  <title>Balancing Platform Robot</title>
+	  <link>//juggling-robot</link>
+	  <author></author>
+	  <pubDate>2018-03-23T00:00:00+00:00</pubDate>
+	  <guid>//juggling-robot</guid>
+	  <description><![CDATA[
+	     <h3 id="goals">Goals</h3>
+
+<p>The purpose of this project was to explore various methods of control on a real-world system. Specifically, the goal was to make a robot that could juggle a ping pong ball in a controlled manner. So far the platform is developed enough to control the ball’s position by rolling it around. This will translate well into control of juggling because the same roll and pitch control needs to be applied. The next steps are to gain an understanding of a dynamic model for a bouncing ball and to develop the necessary trajectory in the platforms motion to transfer energy to the ball vertically.</p>
+
+<h3 id="components">Components</h3>
+
+<h4 id="hardware">Hardware</h4>
+<p>The device is a 6-degree-of-freedom Stewart platform. Credit for the design of the platform goes to <a href="https://www.youtube.com/watch?v=j4OmVLc_oDw&amp;t=4s">Full Motion Dynamics</a>, and I found all the files and plans on <a href="http://www.x-sim.de/forum/viewtopic.php?f=38&amp;t=913">this page</a>. The six servo motors on the bottom are controlled by an Arduino Uno. All the kinematics for the platform are performed on the Arduino. Desired roll and pitch angles as well as desired vertical position are sent to the Arduino over serial link and from those values it computes the inverse kinematics to find the necessary servo motor signal to achieve the desired motion. It is also possible to control the platform’s position in the horizontal plane and its yaw, but so far these controls have not been needed.</p>
+
+<h4 id="feedback">Feedback</h4>
+
+<p>The sensor providing feedback on the ball’s position in this system is a Logitech USB camera. The camera sits on a tripod above the platform and looks down on it at an angle. The video is fed into a pipeline to extract the ball’s position using OpenCV functions. The code first applies a filter to locate the green tape along the platform and extracts corner edges from that shape. Then the image conatined within those four corners is project into a new square image. This new image provides an orthogonal view of the platform with the ball on it. The orthoganl image is then filtered to find the orange ping pong ball and it reports the position of the ball within the image and relates that to position on the platform. This may not be the most robust sensor and method of obtaining the ball’s position, but I wanted to explore a more interesting sensor and the capabilities of computer vision in a dynamic system. Weaknesses of this sensing include the low framerate of the USB camera (30 Hz) and the fact that any time the view of the platform is obstructed by something else the image processing falls apart.</p>
+
+<h4 id="control">Control</h4>
+
+<p>Several types of controllers were attempted on this system. A PID controller was developed first for its simplicity. The velocity of the ball is approximated using the ad-hoc “dirty derivative” differentiation structure. Due to imperfections in the construction of the platform, its measurements, and noise in the ball position readings, the PID controller was barely stable. A state space controller for the ball was developed next with the states being the ball’s x and y position and velocity on the platform. This controller provided marginally better control. Real success in stabile control of rolling the ball came from implementation of an LQR controller. Setting the LQR to penalize error in the ball’s position stronger than error in its velocity and penalizing control effort a relatively high amount led to the most stable control so far. That is what can be seen in the video.</p>
+
+<p>Excluding the kinematics for the platform, all the control was developed in Python within a ROS package. The <a href="https://github.com/drewbwarren/bouncing_platform_package">github repo</a> for this project contains the entire ROS package for the platform, and further information on how the package is structured can be found on the readme for the repo.</p>
+
+
+	  ]]></description>
+	</item>
+
+	<item>
+	  <title>Autonomous Quadrotor from Scratch</title>
+	  <link>//quadrotor</link>
+	  <author></author>
+	  <pubDate>2018-03-22T00:00:00+00:00</pubDate>
+	  <guid>//quadrotor</guid>
+	  <description><![CDATA[
+	     <h3 id="goals">Goals</h3>
+<p>In building this quadrotor I wanted some practical experience in applying controls algorithms on a physical system through embedded hardware. Quadrotors are very sensitive systems in the sense that very small factors such as perturbations in rotor speed or sensor noise can affect the stability of the flight. By the end of the project I developed 6 interconnected compensators actuating 4 rotors to control yaw, yaw rate, pitch, roll, height, and position in the horizontal plane.</p>
+
+<h4 id="sensing">Sensing</h4>
+<p>All the hardware for the quadrotor was provided by Northwestern University, most of it already assembled and configured. The quadrotor contained a 6-axis inertial measurement unit that reported inertial forces acting in three directions through an accelerometer and rotational velocities in three directions through a gyroscope. The data from the accelerometer was used to calculate roll and pitch angles. The gyroscope data was used for the rotational rates in the controllers. Additionally the quadrotor contained an IR sensor in collaboration with an HTC Vive Lighthouse placed above the quadrotor. The Lighthouse sends out an array of infrared beams and the sensor on the quadrotor receives them. In this way the sensor reports its position relative to the Lighthouse in three directions.</p>
+
+<h4 id="controllers">Controllers</h4>
+<p>I first developed controls for the pitch. I suspended the quadrotor using some string to effectively reduce the system to one degree of freedom. A PID controller was built around the pitch. It received data from the IMU about the pitch angle and rotational velocity and calculated the necessary rotor speeds needed to correct the pitch toward a target position. The same process was done for the roll. The target positions for these two controllers were then connected to an input from a joystick controller together with basic controls to raise or lower the speed of all four rotors to manually control the height. After tuning controllers, the joystick effectively sent commands to control the height, roll and pitch of the quadrotor making it function the same as any low-grade, off-the-shelf quadrotor.</p>
+
+<p>At this point the HTC Vive sensors were introduced in the effort to develop autonomous position control. Another PD controller was built aroun the pitch controller for the x position of the quadrotor. It received as its input a target position, the feedback was the data from the Vive sensor, and the output was the target pitch for the previously built PID controller. Another PD controller like this was built around the roll to control y position. After tuning these controls the quadrotor could hold to a target position in the horizontal plane provided by joystick input. Work was done to accomplish the same for the height of the quadrotor, but time restraints limited the development of that controller.</p>
+
+
+	  ]]></description>
+	</item>
+
+	<item>
+	  <title>Baxter Butler</title>
+	  <link>//baxter-butler</link>
+	  <author></author>
+	  <pubDate>2017-12-08T00:00:00+00:00</pubDate>
+	  <guid>//baxter-butler</guid>
+	  <description><![CDATA[
+	     <h3 id="tasks">Tasks</h3>
+
+<h4 id="locate-the-cup">Locate the Cup</h4>
+
+<p>The first main task of the project was to find the cup and then grab it. Baxter starts with the arm in a position such that the end effector is horizontal and faces the table so that the hand camera can see the top of the table. All of that is done in a ROS node called <code class="language-plaintext highlighter-rouge">scan</code>. At the same time the <code class="language-plaintext highlighter-rouge">track_cup</code> node performs some computer vision filtering to locate the center of a red cup. Once the center of the cup is centered in the middle of the camera’s view, the <code class="language-plaintext highlighter-rouge">move_to_cup</code> node is started, which executes a motion from the arm’s current position to move directly to a grasping position.</p>
+
+<h4 id="skeleton-tracker">Skeleton Tracker</h4>
+
+<p>At this point, the Asus Xtion camera (a simplified version of the Xbox Kinect) is used to locate the position of a person’s right hand. This is done using the <code class="language-plaintext highlighter-rouge">skeletontracker_nu</code> package developed by Northwestern’s NxR lab. This package filters the camera’s data to identify separate people in its view and returns a basic skeleton of each person. The skeleton is just the set of 3D points that correspond to several basic joints, such as neck, shoulder, elbow, wrist, etc. Our <code class="language-plaintext highlighter-rouge">filter_V2</code> node filters through the set of skeletons to select only the person that is closest to Baxter and most directly in front of him. In the end, this node returns the 3D point corresponding to that person’s right hand.</p>
+
+<h4 id="constrained-motion">Constrained Motion</h4>
+
+<p>The final task is to plan a path from the arm’s position where it grabbed the cup to the position of the person’s hand with an orientation constraint such that the cup does not tip over. We used The MoveIt! package from ROS to do this path planning. At first we took the approach of giving MoveIt! the goal pose (the position of the person’s hand) and planning the path in Cartesian space with an orientation constraint included. While this did work, the calculations took a long time. The final approach was to find a joint space solution for the goal pose and then feed those joint positions into MoveIt! to plan a path in joint space. For this approach we actually removed the orientation constraint. Since the start pose and end pose have the same orientation, MoveIt! almost never created paths that change the orientation. While this is not the most robust solution, it did cut down the computation time greatly so that the overall performance was more refined.</p>
+
+
+	  ]]></description>
+	</item>
+
+	<item>
+	  <title>Mobile Robot Arm Controller</title>
+	  <link>//youbot</link>
+	  <author></author>
+	  <pubDate>2017-12-07T00:00:00+00:00</pubDate>
+	  <guid>//youbot</guid>
+	  <description><![CDATA[
+	     <h3 id="background">Background</h3>
+
+<p>This project was the final for a course on robotic manipulation taught by <a href="http://www.mccormick.northwestern.edu/research-faculty/directory/profiles/lynch-kevin.html">Dr. Kevin Lynch</a>. I implemented the controller all in Python with the help of the <a href="https://github.com/NxRLab/ModernRobotics"><em>Modern Robotics</em></a> library provided by Dr. Lynch’s textbook. To visualize the movement of the Youbot, I used the <a href="http://www.coppeliarobotics.com/">V-REP</a> simulator.</p>
+
+<h4 id="kinematics">Kinematics</h4>
+
+<p>The desired trajectory is given as a position and an orientation that change over time. Time scaling is used to maximize the velocity of the trajectory without straining the motors of the robot too much as it accelerates and decelerates at the start and end of the path. At each point along that path, my controller solves for both the joint angles of the 5 joint robot arm and the wheel rotations of the base that will place the end effector at that desired point.</p>
+
+<h4 id="controller">Controller</h4>
+
+<p>I developed a control system to correct the error of the end effector as it moves through the trajectory. The initial position of the arm and base are set such that the robot begins with some error, and the controller quickly brings the end effector in to the correct position. For the controller I built a combined feedforward and PI controller. The feedforward portion comes from the kinematic solution for the joints moving forward directly as if the robot started at an initial position on the path. The PI controller measures the error between current position and desired position and applies gains to reduce the error quickly in a way similar to a second order system. This behavior can be seen in the overshoot and oscillation in the plots of the error.</p>
+
+
+	  ]]></description>
+	</item>
+
+	<item>
+	  <title>University Rover Competion</title>
+	  <link>//mars-rover</link>
+	  <author></author>
+	  <pubDate>2017-06-01T00:00:00+00:00</pubDate>
+	  <guid>//mars-rover</guid>
+	  <description><![CDATA[
+	     <h4 id="university-rover-competition">University Rover Competition</h4>
+
+<p><a href="http://www.marssociety.org/">The Mars Society</a> is a volunteer organization made up of professionals and space connoisseurs whose primary goal is to further the public knowledge of and promote the exploration of Mars. One of the outreach projects that they do to push for Mars exploration is an academic competition called the <a href="http://urc.marssociety.org/home">University Rover Challenge</a>. In this competition, universities from all over the world enter their designs for a world-class Mars rover for review. In 2017, a total of 82 teams submitted their designs, and 32 were chosen to participate in the competition. Those 32 teams brought their rovers to the Mars Society’s Desert Research Station in June 2017 to operate the rover through four different tasks made to reflect actual responsibilities that a rover could have. As part of the Brigham Young University Mars Rover team, I helped the team to take <a href="http://urc.marssociety.org/home/about-urc/urc2017-scores">fourth place</a> at the competition.</p>
+
+<h4 id="design-process">Design Process</h4>
+
+<p>In addition to competing in the University Rover Challenge, this project served as a senior capstone project for my B.S. in Mechanical Engineering at BYU. The capstone projects at BYU offer students an opportunity to apply the design process to real engineering problems that need to be solved. Together with my team, we proposed requirements shape how the design evolved, we established desirability goals that would make our product a world-class rover, and we defined performance measures that would help us and our sponsor know if the rover and the design were meeting requirements. Doing a practical project using the design process helped me learn how to set goals, requirements, and tests, to push designs through an approval process, and to do it all on a team of 16 engineers.</p>
+
+<h4 id="design">Design</h4>
+<p>My main responsibilities for the project were in the design, control, and operation of the robot arm on the rover, as well as the microcontrollers for the drive system. There was a subteam in charge of the chassis, and they were the ones who designed the wheels and sized the motors for each wheel. For the motors they chose a brushless DC motor and gearbox combination built by Anaheim Motors. To complete the wheels they needed my help on the electrical and control aspects. I found and ordered brushless DC motor drivers, connected all the circuits between the motors, the motor drivers, and the main microcontroller, and I programmed the functionality of the drive system.</p>
+
+<p>Mostly I worked on the robot arm on the rover with two other students. Two of the four tasks of the competition required the rover to manipulate and transport objects in the field, and we chose to design and build a serial link robot arm to perform those tasks. The rover from the previous team still had an arm on it, though it had several flaws. The motors in the wrist had not been strong enough to lift the max load necessary in competition and most of the joints had a wide range of play just because gears were loose-fitting.</p>
+
+<p>In redesigning the arm, my subteam and I had to decide which features to keep, which ones to change, and which ones to throw out. We did our own analysis, of the arm geometry, looking at link lengths and the orientation of each joint, to obtain a good reachable workspace from the arm. We kept the same configuration of joints but modified the link lengths to give the arm more space to work in.</p>
+
+<p>The best part of the old arm was the end effector or gripper. We kept the original gripper, but we changed the way it attached to the motors that move it. The wrist had been actuated by one Dynamixel motor to tilt the gripper up and down and another Dynamixel to spin it. We used a bevel gear between these two motors and the gripper so that the two of them worked together to lift and twist the wrist. This increased the maximum load, the wrist could lift without any significant cost.</p>
+
+<p>In an effort to reduce weight, we redesigned the two main links of the arm to be carbon fiber pipes. We moved away from a design with gearbox-motor modules to using linear actuators for the joints that would do the heavy lifting. In our analysis we saw that two of the joints would provide most of the force when lifting objects, so for those two joints we chose linear actuators to move the joints. The linear actuators provided more than enough force to lift the maximum load and their weight was less than the weight of a motor that could provide the necessary torque.</p>
+
+<p>I worked in large part with the electrical subteam to integrate control of the arm motors into the complete system. We used motor drivers built by Pololu to control each joint. The main microcontroller was a PSoC 5 from Cypress Semiconductor. All commands for each motor came from the onboard computer, an Nvidia Jetson TX1, to the PSoC through a serial connection. The PSoC then sent appropriate serial commands to the Pololu motor drivers to actuate the joint motors. The PSoC was also responsible for sending the correct PWM signals to the drive wheel motor controllers to actuate the wheels.</p>
+
+<p>Our original goal in designing the arm was to have a 6 joint arm that incorporated inverse kinematics so that the user could input a Cartesian point and the arm would move each joint the right way to put the gripper at that point. Due to time constraints, we ended up with a 5 joint arm that was controlled by moving each joint individually. Controlling a robot arm joint-by-joint like this is difficult, but the time we had left was better spent practicing with the arm as it was than trying to implement inverse kinematics. Having a good understanding of the capabilities and limitations of the arm was essential for a good performance at the competition. The video featured here shows the rover working through the Equipment Servicing Task where we were asked to perform several manipulation actions that a real rover would be required to do. I was operating the arm and my teammate was driving the rover, and the only vision we had was what we could see from the cameras we had on the rover.</p>
+
+
+	  ]]></description>
+	</item>
+
+	<item>
+	  <title>Special Needs for Speed</title>
+	  <link>//power-wheels</link>
+	  <author></author>
+	  <pubDate>2016-09-01T00:00:00+00:00</pubDate>
+	  <guid>//power-wheels</guid>
+	  <description><![CDATA[
+	     <h3 id="background">Background</h3>
+
+<p><a href="https://vimeo.com/155138998">Special Needs For Speed</a> had previously built a bike for Juliet because of her dwarfism. After a year or so, her condition turned out to be more unique and her knees wouldn’t allow her to make the motion to pedal the bike. Juliet still wanted to play out on the streets with her siblings and friends. The charity’s founder, Deveren Farley, had the idea to build her a motorized car, similar to the Power Wheels toys except stronger and faster. He is a welder by trade, so he came to my professor for help with the mechatronic system.</p>
+
+<h3 id="design">Design</h3>
+
+<p>Four of us students volunteered to work on the project. Deveren came to us, brought with him a “Frozen” themed Power Wheels car, and told us to make it faster and more robust. Two of the students worked on building a strong metal frame to place the body on.</p>
+
+<p>I and the other student were responsible for the electrical system and drive train. I sized a motor for the task and designed the gear ratio needed between the motor and the axle. My teammate and I designed and built a system that would control the motor’s speed for forward and reverse motion. We used an Arduino for the logic because it was inexpensive and our system was not complex enough to need more advanced computers. One of the suggestions given to us by Deveren was to make the car able to control by hand since Juliet had difficulty with her legs. So we designed a dash panel that had all the controls on it: a power switch, a lever for speed control, a switch to control the led ribbon we installed underneath the car, and a battery indicator. We designed the car and the circuit so that it would be easy to charge and switch out batteries when needed.</p>
+
+
+	  ]]></description>
+	</item>
+
+	<item>
+	  <title>Mechatronics Course Ping Pong Ball Shooter</title>
+	  <link>//ping-pong-shooter</link>
+	  <author></author>
+	  <pubDate>2015-12-09T00:00:00+00:00</pubDate>
+	  <guid>//ping-pong-shooter</guid>
+	  <description><![CDATA[
+	     <h3 id="design">Design</h3>
+
+<p>Our team was completely responsible for designing a robot to complete the tasks of the competition and building it from scratch. As we learned about new concepts and electrical components in the course, we would include each new feature to the design. We built the robot out of prototyping materials, prepared each subsystem on breadboards, and tested the robot extensively.</p>
+
+<p>The whole robot was controlled by a PIC32 microcontroller, the code was in C and was compiled on the PIC using a PICkit 3, and it was developed in MPLab X. The features and peripherals that we used to complete the task include interrupts, change notifications, clocking, control of brushed DC, stepper, and servo motors, and sensing with push buttons, IR sensors, and encoders.</p>
+
+<h4 id="base">Base</h4>
+
+<p>We laser cut a base from acrylic and attached two omnidirectional wheels and a caster to it. The wheels were actuated by stepper motors which were controlled from the PIC through Pololu motor drivers. The base was designed with a 90 degree angle in the front so that if the robot ran into a wall the omnidirectional wheels would allow it to slide into the corner to line up with the goals.</p>
+
+<h4 id="sensing">Sensing</h4>
+
+<p>Two push buttons on the front edges of the base sensed with the robot was driving into the wall or corner, and these buttons triggered change notification interrupts in the PIC. The goals and the ping pong ball dispenser in the arena were designated by emitting IR light at specified frequencies. I helped my team develop a sensor with and IR photodiode and a filter to distinguish between the goal and dispenser lights.</p>
+
+<h4 id="actuating">Actuating</h4>
+
+<p>The dispenser was triggered by breaking a vertical laser beam. We placed a stick on the spindle of a servo motor and rotated the motor back and forth six times to fill the hopper with balls. The servo motor was controlled by sending the appropriate duty cycle of a square wave signal using the pulse width modulation feature of the PIC. The ping pong ball shooter was a small DC motor that turned on to shoot the balls when the robot was in place.</p>
+
+<h4 id="electronics">Electronics</h4>
+
+<p>As we introduced new subsystems into the project, our prototyping breadboards became increasingly complex, messy, and buggy. I took it upon myself to convert individual electrical subsystems to printed circuit boards once they were tested and ready for the change. I made all the designs in the PCB design freeware Eagle and printed all the boards on one-sided copper film boards from a mill.</p>
+
+
+	  ]]></description>
+	</item>
+
+
+</channel>
+</rss>

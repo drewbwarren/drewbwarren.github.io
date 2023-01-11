@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+	    <link rel="canonical" href="//quadrotor" />
+    <meta name="referrer" content="origin" />
+    <link rel="next" href="/page2/" />
+
+    <meta property="og:site_name" content="Drew Warren - Portfolio" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Autonomous Quadrotor from Scratch" />
+    <meta property="og:description" content="The controls for this quadrotor were developed from scratch. There are controllers attached to the roll, pitch, and yaw of the quadrotor as well as for its position in the room. An onboard IMU was used for the orientation control and an HTC Vive Lighthouse was used for sensing position relative to the inertial frame." />
+    <meta property="og:url" content="//quadrotor" />
+    <meta property="og:image" content="/assets/images/cover1.jpg" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Autonomous Quadrotor from Scratch" />
+    <meta name="twitter:description" content="The controls for this quadrotor were developed from scratch. There are controllers attached to the roll, pitch, and yaw of the quadrotor as well as for its position in the room. An onboard IMU was used for the orientation control and an HTC Vive Lighthouse was used for sensing position relative to the inertial frame." />
+    <meta name="twitter:url" content="//quadrotor" />
+    <meta name="twitter:image:src" content="/assets/images/cover1.jpg" />
+
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Website",
+    "publisher": "Drew Warren - Portfolio",
+    "name": "Autonomous Quadrotor from Scratch",
+    "url": "//quadrotor",
+    "image": "/assets/images/cover1.jpg",
+    "description": "The controls for this quadrotor were developed from scratch. There are controllers attached to the roll, pitch, and yaw of the quadrotor as well as for its position in the room. An onboard IMU was used for the orientation control and an HTC Vive Lighthouse was used for sensing position relative to the inertial frame."
+}
+    </script>
+
+    <meta name="generator" content="Jekyll 3.0.0" />
+    <link rel="alternate" type="application/rss+xml" title="Drew Warren - Portfolio" href="/feed.xml" />
+
+
+	<body>
+	
+
+		<!-- Navigation -->
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand page-scroll" href="//#home"></a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="page-scroll" href="//#projects">Projects</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="//#about">About</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="//#contact">Contact</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+
+
+		<style>
+.project-header {
+    padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
+    padding-bottom: 50px;
+    text-align: center;
+    color: #f8f8f8;
+    background: url(/img/projects/quadrotor.JPG) no-repeat center center;
+    background-size: cover;
+}
+
+.project {
+    font-size: 18px;
+}
+
+h3 {
+    font-size: 28px;
+}
+
+h4 {
+    font-size: 24px;
+}
+
+iframe {
+    padding-top: 20px;
+}
+
+</style>
+
+<div class="project-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="intro-message">
+                    <h1>Autonomous Quadrotor from Scratch</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="project">
+	<div class="contact-content">
+        <div class="container">
+            <div class="row">
+            
+                <div class="col-md-10 col-md-offset-1">
+                    <h3>Summary</h3>
+                    The controls for this quadrotor were developed from scratch. There are controllers attached to the roll, pitch, and yaw of the quadrotor as well as for its position in the room. An onboard IMU was used for the orientation control and an HTC Vive Lighthouse was used for sensing position relative to the inertial frame.
+                </div>
+
+                <div style="text-align: center;">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/Rd4jxvpdiQA?rel=0&amp;start=4" frameborder="0" allow-"autoplay: encrypted-media" allowfullscreen></iframe>
+                </div>
+                
+                <div class="col-md-10 col-md-offset-1">
+
+		            <h3 id="goals">Goals</h3>
+<p>In building this quadrotor I wanted some practical experience in applying controls algorithms on a physical system through embedded hardware. Quadrotors are very sensitive systems in the sense that very small factors such as perturbations in rotor speed or sensor noise can affect the stability of the flight. By the end of the project I developed 6 interconnected compensators actuating 4 rotors to control yaw, yaw rate, pitch, roll, height, and position in the horizontal plane.</p>
+
+<h4 id="sensing">Sensing</h4>
+<p>All the hardware for the quadrotor was provided by Northwestern University, most of it already assembled and configured. The quadrotor contained a 6-axis inertial measurement unit that reported inertial forces acting in three directions through an accelerometer and rotational velocities in three directions through a gyroscope. The data from the accelerometer was used to calculate roll and pitch angles. The gyroscope data was used for the rotational rates in the controllers. Additionally the quadrotor contained an IR sensor in collaboration with an HTC Vive Lighthouse placed above the quadrotor. The Lighthouse sends out an array of infrared beams and the sensor on the quadrotor receives them. In this way the sensor reports its position relative to the Lighthouse in three directions.</p>
+
+<h4 id="controllers">Controllers</h4>
+<p>I first developed controls for the pitch. I suspended the quadrotor using some string to effectively reduce the system to one degree of freedom. A PID controller was built around the pitch. It received data from the IMU about the pitch angle and rotational velocity and calculated the necessary rotor speeds needed to correct the pitch toward a target position. The same process was done for the roll. The target positions for these two controllers were then connected to an input from a joystick controller together with basic controls to raise or lower the speed of all four rotors to manually control the height. After tuning controllers, the joystick effectively sent commands to control the height, roll and pitch of the quadrotor making it function the same as any low-grade, off-the-shelf quadrotor.</p>
+
+<p>At this point the HTC Vive sensors were introduced in the effort to develop autonomous position control. Another PD controller was built aroun the pitch controller for the x position of the quadrotor. It received as its input a target position, the feedback was the data from the Vive sensor, and the output was the target pitch for the previously built PID controller. Another PD controller like this was built around the roll to control y position. After tuning these controls the quadrotor could hold to a target position in the horizontal plane provided by joystick input. Work was done to accomplish the same for the height of the quadrotor, but time restraints limited the development of that controller.</p>
+
+
+
+                </div>
+            </div>
+	    </div>
+    </div>
+</div>
+
+
+		<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <ul class="list-inline">
+                    <li>
+                        <a href="//#home">Home</a>
+                    </li>
+                    <li class="footer-menu-divider">&sdot;</li>
+                    <li>
+                        <a href="//#projects">Projects</a>
+                    </li>
+                    <li class="footer-menu-divider">&sdot;</li>
+                    <li>
+                        <a href="//#about">About</a>
+                    </li>
+                    <li class="footer-menu-divider">&sdot;</li>
+                    <li>
+                        <a href="//#contact">Contact</a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted small"></p>
+            </div>
+            <div class="col-md-4">
+                
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+	</body>
+</html>

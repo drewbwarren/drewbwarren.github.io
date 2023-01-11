@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+	    <link rel="canonical" href="//youbot" />
+    <meta name="referrer" content="origin" />
+    <link rel="next" href="/page2/" />
+
+    <meta property="og:site_name" content="Drew Warren - Portfolio" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Mobile Robot Arm Controller" />
+    <meta property="og:description" content="As a project for a robotic manipulation course, I developed a controller for the Kuka Youbot. From a desired trajectory for the end effector, I calculated the joint angles and base states that will place the end effector in that trajectory. To correct an initial error from the trajectory and to continue through the path, I used a combined feedforward and PI controller." />
+    <meta property="og:url" content="//youbot" />
+    <meta property="og:image" content="/assets/images/cover1.jpg" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Mobile Robot Arm Controller" />
+    <meta name="twitter:description" content="As a project for a robotic manipulation course, I developed a controller for the Kuka Youbot. From a desired trajectory for the end effector, I calculated the joint angles and base states that will place the end effector in that trajectory. To correct an initial error from the trajectory and to continue through the path, I used a combined feedforward and PI controller." />
+    <meta name="twitter:url" content="//youbot" />
+    <meta name="twitter:image:src" content="/assets/images/cover1.jpg" />
+
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Website",
+    "publisher": "Drew Warren - Portfolio",
+    "name": "Mobile Robot Arm Controller",
+    "url": "//youbot",
+    "image": "/assets/images/cover1.jpg",
+    "description": "As a project for a robotic manipulation course, I developed a controller for the Kuka Youbot. From a desired trajectory for the end effector, I calculated the joint angles and base states that will place the end effector in that trajectory. To correct an initial error from the trajectory and to continue through the path, I used a combined feedforward and PI controller."
+}
+    </script>
+
+    <meta name="generator" content="Jekyll 3.0.0" />
+    <link rel="alternate" type="application/rss+xml" title="Drew Warren - Portfolio" href="/feed.xml" />
+
+
+	<body>
+	
+
+		<!-- Navigation -->
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand page-scroll" href="//#home"></a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="page-scroll" href="//#projects">Projects</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="//#about">About</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="//#contact">Contact</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+
+
+		<style>
+.project-header {
+    padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
+    padding-bottom: 50px;
+    text-align: center;
+    color: #f8f8f8;
+    background: url(/img/projects/youbot.png) no-repeat center center;
+    background-size: cover;
+}
+
+.project {
+    font-size: 18px;
+}
+
+h3 {
+    font-size: 28px;
+}
+
+h4 {
+    font-size: 24px;
+}
+
+iframe {
+    padding-top: 20px;
+}
+
+</style>
+
+<div class="project-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="intro-message">
+                    <h1>Mobile Robot Arm Controller</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="project">
+	<div class="contact-content">
+        <div class="container">
+            <div class="row">
+            
+                <div class="col-md-10 col-md-offset-1">
+                    <h3>Summary</h3>
+                    As a project for a robotic manipulation course, I developed a controller for the Kuka Youbot. From a desired trajectory for the end effector, I calculated the joint angles and base states that will place the end effector in that trajectory. To correct an initial error from the trajectory and to continue through the path, I used a combined feedforward and PI controller.
+                </div>
+
+                <div style="text-align: center;">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/UDVB9yLg-7c?rel=0&amp;showinfo=0" frameborder="0" allow-"autoplay: encrypted-media" allowfullscreen></iframe>
+                </div>
+                
+                <div class="col-md-10 col-md-offset-1">
+
+		            <h3 id="background">Background</h3>
+
+<p>This project was the final for a course on robotic manipulation taught by <a href="http://www.mccormick.northwestern.edu/research-faculty/directory/profiles/lynch-kevin.html">Dr. Kevin Lynch</a>. I implemented the controller all in Python with the help of the <a href="https://github.com/NxRLab/ModernRobotics"><em>Modern Robotics</em></a> library provided by Dr. Lynch’s textbook. To visualize the movement of the Youbot, I used the <a href="http://www.coppeliarobotics.com/">V-REP</a> simulator.</p>
+
+<h4 id="kinematics">Kinematics</h4>
+
+<p>The desired trajectory is given as a position and an orientation that change over time. Time scaling is used to maximize the velocity of the trajectory without straining the motors of the robot too much as it accelerates and decelerates at the start and end of the path. At each point along that path, my controller solves for both the joint angles of the 5 joint robot arm and the wheel rotations of the base that will place the end effector at that desired point.</p>
+
+<h4 id="controller">Controller</h4>
+
+<p>I developed a control system to correct the error of the end effector as it moves through the trajectory. The initial position of the arm and base are set such that the robot begins with some error, and the controller quickly brings the end effector in to the correct position. For the controller I built a combined feedforward and PI controller. The feedforward portion comes from the kinematic solution for the joints moving forward directly as if the robot started at an initial position on the path. The PI controller measures the error between current position and desired position and applies gains to reduce the error quickly in a way similar to a second order system. This behavior can be seen in the overshoot and oscillation in the plots of the error.</p>
+
+
+
+                </div>
+            </div>
+	    </div>
+    </div>
+</div>
+
+
+		<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <ul class="list-inline">
+                    <li>
+                        <a href="//#home">Home</a>
+                    </li>
+                    <li class="footer-menu-divider">&sdot;</li>
+                    <li>
+                        <a href="//#projects">Projects</a>
+                    </li>
+                    <li class="footer-menu-divider">&sdot;</li>
+                    <li>
+                        <a href="//#about">About</a>
+                    </li>
+                    <li class="footer-menu-divider">&sdot;</li>
+                    <li>
+                        <a href="//#contact">Contact</a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted small"></p>
+            </div>
+            <div class="col-md-4">
+                
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+	</body>
+</html>

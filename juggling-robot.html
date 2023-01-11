@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+	    <link rel="canonical" href="//juggling-robot" />
+    <meta name="referrer" content="origin" />
+    <link rel="next" href="/page2/" />
+
+    <meta property="og:site_name" content="Drew Warren - Portfolio" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Balancing Platform Robot" />
+    <meta property="og:description" content="This individual project for the Northwestern MSR program was an exploration of feedback control systems on a real world dynamic system. The device used is a 6-degree-of-freedom Stewart platform actuated by six servo motors. Feedback for the position of the ball is provided by a USB camera with some image processing applied to the video." />
+    <meta property="og:url" content="//juggling-robot" />
+    <meta property="og:image" content="/assets/images/cover1.jpg" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Balancing Platform Robot" />
+    <meta name="twitter:description" content="This individual project for the Northwestern MSR program was an exploration of feedback control systems on a real world dynamic system. The device used is a 6-degree-of-freedom Stewart platform actuated by six servo motors. Feedback for the position of the ball is provided by a USB camera with some image processing applied to the video." />
+    <meta name="twitter:url" content="//juggling-robot" />
+    <meta name="twitter:image:src" content="/assets/images/cover1.jpg" />
+
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Website",
+    "publisher": "Drew Warren - Portfolio",
+    "name": "Balancing Platform Robot",
+    "url": "//juggling-robot",
+    "image": "/assets/images/cover1.jpg",
+    "description": "This individual project for the Northwestern MSR program was an exploration of feedback control systems on a real world dynamic system. The device used is a 6-degree-of-freedom Stewart platform actuated by six servo motors. Feedback for the position of the ball is provided by a USB camera with some image processing applied to the video."
+}
+    </script>
+
+    <meta name="generator" content="Jekyll 3.0.0" />
+    <link rel="alternate" type="application/rss+xml" title="Drew Warren - Portfolio" href="/feed.xml" />
+
+
+	<body>
+	
+
+		<!-- Navigation -->
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand page-scroll" href="//#home"></a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="page-scroll" href="//#projects">Projects</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="//#about">About</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="//#contact">Contact</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+
+
+		<style>
+.project-header {
+    padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
+    padding-bottom: 50px;
+    text-align: center;
+    color: #f8f8f8;
+    background: url(/img/projects/platform_rolling.png) no-repeat center center;
+    background-size: cover;
+}
+
+.project {
+    font-size: 18px;
+}
+
+h3 {
+    font-size: 28px;
+}
+
+h4 {
+    font-size: 24px;
+}
+
+iframe {
+    padding-top: 20px;
+}
+
+</style>
+
+<div class="project-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="intro-message">
+                    <h1>Balancing Platform Robot</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="project">
+	<div class="contact-content">
+        <div class="container">
+            <div class="row">
+            
+                <div class="col-md-10 col-md-offset-1">
+                    <h3>Summary</h3>
+                    This individual project for the Northwestern MSR program was an exploration of feedback control systems on a real world dynamic system. The device used is a 6-degree-of-freedom Stewart platform actuated by six servo motors. Feedback for the position of the ball is provided by a USB camera with some image processing applied to the video.
+                </div>
+
+                <div style="text-align: center;">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/3yrvO972--8?rel=0&amp;showinfo=0" frameborder="0" allow-"autoplay: encrypted-media" allowfullscreen></iframe>
+                </div>
+                
+                <div class="col-md-10 col-md-offset-1">
+
+		            <h3 id="goals">Goals</h3>
+
+<p>The purpose of this project was to explore various methods of control on a real-world system. Specifically, the goal was to make a robot that could juggle a ping pong ball in a controlled manner. So far the platform is developed enough to control the ball’s position by rolling it around. This will translate well into control of juggling because the same roll and pitch control needs to be applied. The next steps are to gain an understanding of a dynamic model for a bouncing ball and to develop the necessary trajectory in the platforms motion to transfer energy to the ball vertically.</p>
+
+<h3 id="components">Components</h3>
+
+<h4 id="hardware">Hardware</h4>
+<p>The device is a 6-degree-of-freedom Stewart platform. Credit for the design of the platform goes to <a href="https://www.youtube.com/watch?v=j4OmVLc_oDw&amp;t=4s">Full Motion Dynamics</a>, and I found all the files and plans on <a href="http://www.x-sim.de/forum/viewtopic.php?f=38&amp;t=913">this page</a>. The six servo motors on the bottom are controlled by an Arduino Uno. All the kinematics for the platform are performed on the Arduino. Desired roll and pitch angles as well as desired vertical position are sent to the Arduino over serial link and from those values it computes the inverse kinematics to find the necessary servo motor signal to achieve the desired motion. It is also possible to control the platform’s position in the horizontal plane and its yaw, but so far these controls have not been needed.</p>
+
+<h4 id="feedback">Feedback</h4>
+
+<p>The sensor providing feedback on the ball’s position in this system is a Logitech USB camera. The camera sits on a tripod above the platform and looks down on it at an angle. The video is fed into a pipeline to extract the ball’s position using OpenCV functions. The code first applies a filter to locate the green tape along the platform and extracts corner edges from that shape. Then the image conatined within those four corners is project into a new square image. This new image provides an orthogonal view of the platform with the ball on it. The orthoganl image is then filtered to find the orange ping pong ball and it reports the position of the ball within the image and relates that to position on the platform. This may not be the most robust sensor and method of obtaining the ball’s position, but I wanted to explore a more interesting sensor and the capabilities of computer vision in a dynamic system. Weaknesses of this sensing include the low framerate of the USB camera (30 Hz) and the fact that any time the view of the platform is obstructed by something else the image processing falls apart.</p>
+
+<h4 id="control">Control</h4>
+
+<p>Several types of controllers were attempted on this system. A PID controller was developed first for its simplicity. The velocity of the ball is approximated using the ad-hoc “dirty derivative” differentiation structure. Due to imperfections in the construction of the platform, its measurements, and noise in the ball position readings, the PID controller was barely stable. A state space controller for the ball was developed next with the states being the ball’s x and y position and velocity on the platform. This controller provided marginally better control. Real success in stabile control of rolling the ball came from implementation of an LQR controller. Setting the LQR to penalize error in the ball’s position stronger than error in its velocity and penalizing control effort a relatively high amount led to the most stable control so far. That is what can be seen in the video.</p>
+
+<p>Excluding the kinematics for the platform, all the control was developed in Python within a ROS package. The <a href="https://github.com/drewbwarren/bouncing_platform_package">github repo</a> for this project contains the entire ROS package for the platform, and further information on how the package is structured can be found on the readme for the repo.</p>
+
+
+
+                </div>
+            </div>
+	    </div>
+    </div>
+</div>
+
+
+		<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <ul class="list-inline">
+                    <li>
+                        <a href="//#home">Home</a>
+                    </li>
+                    <li class="footer-menu-divider">&sdot;</li>
+                    <li>
+                        <a href="//#projects">Projects</a>
+                    </li>
+                    <li class="footer-menu-divider">&sdot;</li>
+                    <li>
+                        <a href="//#about">About</a>
+                    </li>
+                    <li class="footer-menu-divider">&sdot;</li>
+                    <li>
+                        <a href="//#contact">Contact</a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted small"></p>
+            </div>
+            <div class="col-md-4">
+                
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+	</body>
+</html>
